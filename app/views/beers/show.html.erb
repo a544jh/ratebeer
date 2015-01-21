@@ -15,5 +15,11 @@
   <%= @beer.brewery_id %>
 </p>
 
+<% if !@beer.ratings.empty? %>
+<p>
+	Has <%= @beer.ratings.count %> ratings, average <%= @beer.ratings.average :score %>
+</p>
+<% end %>
+
 <%= link_to 'Edit', edit_beer_path(@beer) %> |
 <%= link_to 'Back', beers_path %>
