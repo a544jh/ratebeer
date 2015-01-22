@@ -17,7 +17,7 @@
 
 <% if !@beer.ratings.empty? %>
 <p>
-	Has <%= pluralize(@beer.ratings.count, 'rating') %>, average <%= @beer.ratings.average :score %>
+	Has <%= pluralize(@beer.ratings.count, 'rating') %>, average <%= @beer.average_rating %>
 </p>
 <% end %>
 
