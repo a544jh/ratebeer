@@ -4,6 +4,15 @@
   <strong>Username:</strong>
   <%= @user.username %>
 </p>
+has made <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %>
+
+<h3>ratings</h3>
+
+<ul>
+ <% @user.ratings.each do |rating| %>
+   <li> <%= rating %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+ <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
