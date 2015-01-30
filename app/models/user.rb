@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
 									message: "has to contain at least on number and upper-case letter" },
 						 length: { minimum: 4 }
 						
-	has_many :ratings   # käyttäjällä on monta ratingia
+	has_many :ratings, dependent: :destroy   # käyttäjällä on monta ratingia
 	has_many :beers, through: :ratings
 end
