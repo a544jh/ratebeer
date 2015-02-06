@@ -8,6 +8,7 @@ gem 'rails', '4.2.0'
 group :development, :test do
   gem 'sqlite3'
   gem 'better_errors'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :production do
