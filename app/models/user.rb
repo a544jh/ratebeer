@@ -17,10 +17,17 @@ class User < ActiveRecord::Base
 	end
 	
 	def favorite_style
+		return nil if ratings.empty?
 		styles = beers.select(:style).distinct
-		styles.max_by do |st|
-			ratings.joins(:beer).where("beers.style = ?", st).average(:score)
-		end	
+		max = styles.max_by {|st| ratings.joins(:beer).where("beers.style = ?", st.style).average(:score)}
+		max.style	
+	end
+	
+	def favorite_brewery
+		return nil if ratings.empty?
+		breweries = beers.select(:brewery_id).distinct
+		max = breweries.max_by {|br| ratings.joins(:beer).where("beers.brewery_id = ?", br.brewery_id).average(:score)}
+		max.brewery	
 	end
 			
 end

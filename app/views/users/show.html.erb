@@ -12,6 +12,12 @@
 	<% end %>
 </p>
 
+<p>
+	Favorite beer: <%= link_to @user.favorite_beer %> <br>
+	Favorite style: <%= @user.favorite_style %> <br>
+	Favorite brewery: <%= link_to @user.favorite_brewery.name, @user.favorite_brewery %>
+</p>
+
 <h3>ratings</h3>
 
 <ul>
