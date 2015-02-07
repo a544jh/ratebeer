@@ -41,4 +41,12 @@ describe "Rating" do
 	expect(page).to have_content "has made 1 rating"
 	expect(page).to have_content "iso 3"
   end
+  
+  it "can be deleted by user" do
+	FactoryGirl.create(:rating, score:10, beer:beer1, user:user)
+	expect(user.ratings.count).to eq(1)
+	visit user_path(user)
+	click_link "delete"
+	expect(user.ratings.count).to eq(0)
+  end
 end
