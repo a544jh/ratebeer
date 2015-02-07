@@ -93,8 +93,12 @@
         1,
         null,
         1,
-        92,
-        75,
+        111,
+        79,
+        null,
+        null,
+        1,
+        4,
         null,
         null
       ],
@@ -194,6 +198,7 @@
         null
       ],
       "/home/axel/github/ratebeer/app/controllers/beers_controller.rb": [
+        1,
         1,
         1,
         1,
@@ -370,13 +375,6 @@
         0,
         null,
         null,
-        1,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
         null
       ],
       "/home/axel/github/ratebeer/app/controllers/ratings_controller.rb": [
@@ -410,6 +408,6 @@
         null
       ]
     },
-    "timestamp": 1423333125
+    "timestamp": 1423337177
   }
 }
