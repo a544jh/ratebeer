@@ -32,4 +32,13 @@ describe "Rating" do
 	expect(page).to have_content "Number of ratings 2"
 	expect(page).to have_content "iso 3"
   end
+  
+  it "shows only users ratings on user's page" do
+	FactoryGirl.create(:rating, score:10, beer:beer1, user:user)
+	FactoryGirl.create(:rating, score:12, beer:beer2)
+	visit user_path(user)
+	
+	expect(page).to have_content "has made 1 rating"
+	expect(page).to have_content "iso 3"
+  end
 end
