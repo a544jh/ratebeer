@@ -58,3 +58,5 @@ def sign_in(credentials)
     fill_in('password', with:credentials[:password])
     click_button('Log in')
 end
+
+require 'webmock/rspec'

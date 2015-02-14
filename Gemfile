@@ -16,12 +16,15 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
 
 group :production do
    gem 'pg'
    gem 'rails_12factor'
 end
+
+gem 'httparty'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
