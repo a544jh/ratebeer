@@ -30,8 +30,8 @@ let!(:user) { FactoryGirl.create :user }
   
 	it "can have favorite style and brewery" do
 		good = FactoryGirl.create(:brewery, name:"Goodbrewery")
-		
-		beer = FactoryGirl.create(:beer, style:"Cool")
+		style = FactoryGirl.create(:style, name:"Cool")
+		beer = FactoryGirl.create(:beer, style:style)
 		FactoryGirl.create(:rating, score:25, beer:beer, user:user)
 		good.beers << beer
 	

@@ -84,14 +84,13 @@ describe User do
     
     it "is the only rated if only one rating" do
       beer = create_beer_with_rating(10, user,"Anon")
-
-      expect(user.favorite_style).to eq("Anon")
+      expect(user.favorite_style.name).to eq("Anon")
     end
     
     it "is the one with highest rating if several rated" do
       create_beers_with_ratings(10, 20, 15, 7, 9, user, "Anon")
       best = create_beer_with_rating(25, user, "Cool")
-      expect(user.favorite_style).to eq("Cool")
+      expect(user.favorite_style.name).to eq("Cool")
     end
   end
   
@@ -127,7 +126,8 @@ describe User do
   
 end
 
-def create_beer_with_rating(score, user, style)
+def create_beer_with_rating(score, user, stylename)
+	  style = FactoryGirl.create(:style, name:stylename)
       beer = FactoryGirl.create(:beer, style:style)
       FactoryGirl.create(:rating, score:score, beer:beer, user:user)
       beer
