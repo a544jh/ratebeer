@@ -12,7 +12,7 @@
   <% list.each do |li| %>
       <tr>
         <td><%= link_to li.name, li %></td>
-        <td><%= li.average_rating %></td>
+        <td><%= round(li.average_rating) %></td>
         <td></td>
       </tr>
   <% end %>
