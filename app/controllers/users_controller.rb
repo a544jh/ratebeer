@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_user_is_admin, only: [:toggle_banned]
 
   # GET /users
   # GET /users.json
@@ -62,6 +63,15 @@ class UsersController < ApplicationController
 	else
 		redirect_to users_url, notice: 'Must be logged in to delete'
 	end
+  end
+  
+  def toggle_banned
+    user = User.find(params[:id])
+    user.update_attribute :banned, (not user.banned)
+
+    new_status = user.banned? ? "unfrozen" : "frozen"
+
+    redirect_to :back, notice:"user #{user.username} #{new_status}"
   end
 
   private

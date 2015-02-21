@@ -3,6 +3,7 @@
 <p>
   <strong>Username:</strong>
   <%= @user.username %>
+  <% if @user.banned %> <span class="label label-info">account frozen</span> <% end %>
 </p>
 <p>has made <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %></p>
 <p>
@@ -34,6 +35,10 @@
 <% if @user == current_user %>
 	<%= link_to 'Edit', edit_user_path(@user) %> |
 	<%= link_to 'Delete user', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
+
+<% if current_user and current_user.admin %>
+	<%= link_to @user.banned ? "reactivate account" : "freeze account", toggle_banned_user_path(@user.id), method: :post, class: @user.banned ? "btn btn-primary" : "btn btn-danger" %>
 <% end %>
 
 <%= link_to 'Back', users_path %>
