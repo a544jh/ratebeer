@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+
 <%= form_tag places_path do %>
-  city <%= text_field_tag :city, params[:city] %>
-  <%= submit_tag "Search" %>
+<div class="input-group">
+  <%= text_field_tag :city, params[:city], class:"form-control", placeholder:"city" %>
+  <span class="input-group-btn">
+	<%= submit_tag "Search", class:"btn btn-default" %>
+  </span>
+</div>
 <% end %>
 
 <% if @places %>
