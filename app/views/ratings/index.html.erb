@@ -1,3 +1,25 @@
+<div class="row">
+	<div class="col-md-4">
+		<%= render 'average_ratings_list', list: Beer.top(3), heading:'Best beers' %>
+	</div>
+	<div class="col-md-4">
+		<%= render 'average_ratings_list', list: Brewery.top(3), heading:'Best breweries' %>
+	</div>
+	<div class="col-md-4">
+		<%= render 'average_ratings_list', list: Style.top(3), heading:'Best styles' %>
+	</div>
+</div>
+
+<%= render 'active_users_list', users: User.most_ratings(3), heading:'Most active users' %>
+
+<h2>Recent ratings</h2>
+
+<ul>
+ <% Rating.recent.each do |rating| %>
+   <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
+ <% end %>
+</ul>
+
 <h2>List of ratings</h2>
 
 <p> Number of ratings <%= @ratings.count %> </p>

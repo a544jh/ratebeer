@@ -1,0 +1,20 @@
+<h3><%= heading %></h3>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Average</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% list.each do |li| %>
+      <tr>
+        <td><%= link_to li.name, li %></td>
+        <td><%= li.average_rating %></td>
+        <td></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

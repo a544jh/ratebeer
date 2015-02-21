@@ -29,5 +29,10 @@ class User < ActiveRecord::Base
 		max = breweries.max_by {|br| ratings.joins(:beer).where("beers.brewery_id = ?", br.brewery_id).average(:score)}
 		max.brewery	
 	end
+	
+	def self.most_ratings(n)
+		most_ratings = User.all.sort_by{ |u| -(u.ratings.count||0) }
+		most_ratings.first(n)
+	end
 			
 end
