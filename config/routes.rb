@@ -10,10 +10,13 @@ Rails.application.routes.draw do
   end
 
   resources :beers
-
+  get 'beerlist', to:'beers#list'
+  get 'ngbeerlist', to:'beers#nglist'
+  
   resources :breweries do
     post 'toggle_activity', on: :member
   end
+  get 'ngbrewerylist', to:'breweries#nglist'
   
   root 'breweries#index'
   

@@ -13,3 +13,5 @@ deploy:
   app: fathomless-river-7770
   on:
     repo: a544jh/ratebeer
+notifications:
+  email: false
