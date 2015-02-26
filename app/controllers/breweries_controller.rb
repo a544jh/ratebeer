@@ -8,7 +8,9 @@ class BreweriesController < ApplicationController
   def index
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+    last_order = session[:order]
     order = params[:order] || 'name'
+    session[:order] = order
     
     case order
       when 'name' then @active_breweries = @active_breweries.sort_by{ |b| b.name }
@@ -16,6 +18,11 @@ class BreweriesController < ApplicationController
       when 'year' then @active_breweries = @active_breweries.sort_by{ |b| b.year }
 		@retired_breweries = @retired_breweries.sort_by{ |b| b.year }
     end
+    if order.eql? last_order then
+		@active_breweries = @active_breweries.reverse
+		@retired_breweries = @retired_breweries.reverse
+		session[:order] = nil
+	end
   end
 
   # GET /breweries/1
