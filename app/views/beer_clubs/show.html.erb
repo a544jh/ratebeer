@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <h2><%= @beer_club.name %> <%= @beer_club.city %></h2>
 </p>
@@ -11,11 +9,21 @@
 <p>
 	<h3>Members</h3>
 	<ul>
-		<% @beer_club.users.each do |user| %>
+		<% @beer_club.members.each do |user| %>
 			<li><%= link_to user.username, user %></li>
 		<% end %>
 	</ul>
 </p>
+<% if current_user && current_user.member_of(@beer_club) %>
+	<p>
+		<h3>Outstanding applications</h3>
+		<ul>
+			<% @beer_club.applicants.each do |user| %>
+				<li><%= link_to user.username, user %> <%= link_to "confirm", confirm_membership_path(Membership.find_by(user_id: user.id, beer_club_id: @beer_club.id, confirmed: false)), method: :post, class: "btn btn-primary" %> </li>
+			<% end %>
+		</ul>
+	</p>
+<% end %>
 
 <% if current_user and !@beer_club.users.include?(current_user)%>
 	<%= form_for(@membership) do |f| %>

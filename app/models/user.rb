@@ -34,5 +34,9 @@ class User < ActiveRecord::Base
 		sorted_by_rating_in_desc_order = User.all.select{ |u| u.ratings.any? }.sort_by{ |u| -(u.ratings.count) }
 		sorted_by_rating_in_desc_order[0..(n-1)]
 	end
+	
+	def member_of(bc)
+		Membership.find_by(user_id: id, beer_club_id: bc.id, confirmed: true)
+	end
 			
 end
