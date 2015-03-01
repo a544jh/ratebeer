@@ -10,16 +10,16 @@ class BreweriesController < ApplicationController
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
     last_order = session[:order]
-    order = params[:order] || 'name'
-    session[:order] = order
+    @order = params[:order] || 'name'
+    session[:order] = @order
     
-    case order
+    case @order
       when 'name' then @active_breweries = @active_breweries.sort_by{ |b| b.name }
 		@retired_breweries =  @retired_breweries.sort_by{ |b| b.name }
       when 'year' then @active_breweries = @active_breweries.sort_by{ |b| b.year }
 		@retired_breweries = @retired_breweries.sort_by{ |b| b.year }
     end
-    if order.eql? last_order then
+    if @order.eql? last_order then
 		@active_breweries = @active_breweries.reverse
 		@retired_breweries = @retired_breweries.reverse
 		session[:order] = nil
@@ -101,6 +101,15 @@ class BreweriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def brewery_params
       params.require(:brewery).permit(:name, :year, :active)
+    end
+    
+    def expire_cache
+	  ["brewerylist-name", "brewerylist-year"].each{ |f| expire_fragment(f) }
+    end
+  
+    def skip_if_cached
+	  @order = params[:order] || 'name'
+      return render :index if fragment_exist?( "brewerylist-#{@order}"  )
     end
     
 end
