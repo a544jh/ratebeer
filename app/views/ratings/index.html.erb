@@ -1,32 +1,34 @@
-<div class="row">
-	<div class="col-md-4">
-		<%= render 'average_ratings_list', list: Beer.top(3), heading:'Best beers' %>
+<% cache "ratingpage", skip_digest: true do %>
+	<div class="row">
+		<div class="col-md-4">
+			<%= render 'average_ratings_list', list: @top_beers, heading:'Best beers' %>
+		</div>
+		<div class="col-md-4">
+			<%= render 'average_ratings_list', list: @top_breweries, heading:'Best breweries' %>
+		</div>
+		<div class="col-md-4">
+			<%= render 'average_ratings_list', list: @top_styles, heading:'Best styles' %>
+		</div>
 	</div>
-	<div class="col-md-4">
-		<%= render 'average_ratings_list', list: Brewery.top(3), heading:'Best breweries' %>
-	</div>
-	<div class="col-md-4">
-		<%= render 'average_ratings_list', list: Style.top(3), heading:'Best styles' %>
-	</div>
-</div>
-
-<%= render 'active_users_list', users: User.most_ratings(3), heading:'Most active users' %>
-
-<h2>Recent ratings</h2>
-
-<ul>
- <% Rating.recent.each do |rating| %>
-   <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
- <% end %>
-</ul>
-
-<h2>List of ratings</h2>
-
-<p> Number of ratings <%= @ratings.count %> </p>
-
-<ul>
- <% @ratings.each do |rating| %>
-   <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
- <% end %>
-</ul>
+	
+	<%= render 'active_users_list', users: @most_active_users, heading:'Most active users' %>
+	
+	<h2>Recent ratings</h2>
+	
+	<ul>
+	 <% @recent_ratings.each do |rating| %>
+	   <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
+	 <% end %>
+	</ul>
+	
+	<h2>List of ratings</h2>
+	
+	<p> Number of ratings <%= @ratings.count %> </p>
+	
+	<ul>
+	 <% @ratings.each do |rating| %>
+	   <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
+	 <% end %>
+	</ul>
+<% end %>
 <%= link_to 'New Rating', new_rating_path %>

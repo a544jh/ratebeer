@@ -30,9 +30,9 @@ class User < ActiveRecord::Base
 		max.brewery	
 	end
 	
-	def self.most_ratings(n)
-		most_ratings = User.all.sort_by{ |u| -(u.ratings.count||0) }
-		most_ratings.first(n)
+	def self.most_active(n)
+		sorted_by_rating_in_desc_order = User.all.select{ |u| u.ratings.any? }.sort_by{ |u| -(u.ratings.count) }
+		sorted_by_rating_in_desc_order[0..(n-1)]
 	end
 			
 end
