@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 	validates :username, uniqueness: true, length: { minimum: 3, maximum: 15 }
 	validates :password, format: { with: /(?=.*[0-9])(?=.*[A-Z]).+/,
 									message: "has to contain at least on number and upper-case letter" },
-						 length: { minimum: 4 }
+						 length: { minimum: 4 }, unless: "github?"
 						
 	has_many :ratings, dependent: :destroy   # käyttäjällä on monta ratingia
 	has_many :beers, through: :ratings

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228181754) do
+ActiveRecord::Schema.define(version: 20150301150434) do
 
   create_table "beer_clubs", force: :cascade do |t|
     t.string   "name"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150228181754) do
     t.string   "password_digest"
     t.boolean  "admin"
     t.boolean  "banned"
+    t.boolean  "github"
   end
 
 end
